@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esküvői visszaszámláló</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-family: 'Montserrat', sans-serif;
+
+background:
+linear-gradient(rgba(255,245,247,0.85), rgba(255,245,247,0.9)),
+url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e");
+
+background-size:cover;
+background-position:center;
+}
+
+.container{
+
+background: rgba(255,255,255,0.75);
+backdrop-filter: blur(8px);
+
+padding:60px 50px;
+
+border-radius:20px;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.1);
+
+text-align:center;
+
+max-width:800px;
+
+}
+
+h1{
+
+font-family:'Playfair Display', serif;
+
+font-size:48px;
+
+margin-bottom:10px;
+
+color:#6b4c55;
+
+}
+
+.subtitle{
+
+font-size:16px;
+
+letter-spacing:3px;
+
+text-transform:uppercase;
+
+color:#a98a92;
+
+margin-bottom:30px;
+
+}
+
+.date{
+
+font-style:italic;
+
+margin-bottom:40px;
+
+color:#7a5f66;
+
+}
+
+.countdown{
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.box{
+
+background:white;
+
+border-radius:15px;
+
+padding:20px;
+
+width:120px;
+
+box-shadow:0 8px 18px rgba(0,0,0,0.08);
+
+}
+
+.number{
+
+font-size:36px;
+
+font-weight:500;
+
+color:#6b4c55;
+
+}
+
+.label{
+
+font-size:12px;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+color:#a98a92;
+
+margin-top:8px;
+
+}
+
+.footer{
+
+margin-top:40px;
+
+color:#7a5f66;
+
+font-size:15px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Lili & Isi</h1>
+
+<div class="subtitle">
+Visszaszámlálás a nagy napig
+</div>
+
+<div class="date">
+2026. április 25. 14:30
+</div>
+
+<div class="countdown">
+
+<div class="box">
+<div id="days" class="number">0</div>
+<div class="label">nap</div>
+</div>
+
+<div class="box">
+<div id="hours" class="number">0</div>
+<div class="label">óra</div>
+</div>
+
+<div class="box">
+<div id="minutes" class="number">0</div>
+<div class="label">perc</div>
+</div>
+
+<div class="box">
+<div id="seconds" class="number">0</div>
+<div class="label">mp</div>
+</div>
+
+</div>
+
+<div class="footer">
+Szeretettel várunk erre a különleges napra
+</div>
+
+</div>
+
+<script>
+
+const weddingDate = new Date("2026-08-15T14:00:00+02:00").getTime();
+
+function updateCountdown(){
+
+const now = new Date().getTime();
+
+const distance = weddingDate - now;
+
+if(distance <= 0){
+
+document.getElementById("days").innerHTML=0;
+document.getElementById("hours").innerHTML=0;
+document.getElementById("minutes").innerHTML=0;
+document.getElementById("seconds").innerHTML=0;
+
+return;
+}
+
+const days=Math.floor(distance/(1000*60*60*24));
+
+const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+
+const seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("days").innerHTML=days;
+document.getElementById("hours").innerHTML=hours;
+document.getElementById("minutes").innerHTML=minutes;
+document.getElementById("seconds").innerHTML=seconds;
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
