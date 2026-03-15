@@ -1,231 +1,245 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Esküvői visszaszámláló</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Esküvői visszaszámláló</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-<style>
+  <style>
+    :root {
+      --bg1: #fdf9fa;
+      --bg2: #f8eef1;
+      --overlay: rgba(255, 248, 250, 0.86);
+      --card: rgba(255, 255, 255, 0.78);
+      --border: rgba(214, 185, 193, 0.34);
+      --text: #7a5a63;
+      --muted: #b09199;
+      --shadow: 0 18px 40px rgba(122, 90, 99, 0.10);
+    }
 
-body{
-margin:0;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
+    * {
+      box-sizing: border-box;
+    }
 
-font-family: 'Montserrat', sans-serif;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: 'Montserrat', sans-serif;
+      background:
+        linear-gradient(var(--overlay), var(--overlay)),
+        url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      color: var(--text);
+    }
 
-background:
-linear-gradient(rgba(255,245,247,0.85), rgba(255,245,247,0.9)),
-url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e");
+    .container {
+      width: 100%;
+      max-width: 980px;
+      background: rgba(255,255,255,0.32);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 28px;
+      padding: 52px 28px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(80, 55, 63, 0.08);
+    }
 
-background-size:cover;
-background-position:center;
-}
+    h1 {
+      margin: 0 0 12px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      line-height: 1.05;
+      color: #7b5a63;
+    }
 
-.container{
+    .subtitle {
+      margin-bottom: 28px;
+      font-size: 1rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-background: rgba(255,255,255,0.75);
-backdrop-filter: blur(8px);
+    .date {
+      margin-bottom: 42px;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #8f7078;
+    }
 
-padding:60px 50px;
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 24px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
 
-border-radius:20px;
+    .box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px 16px 22px;
+      box-shadow: var(--shadow);
+    }
 
-box-shadow:0 20px 40px rgba(0,0,0,0.1);
+    .number {
+      font-size: clamp(2.3rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: #7b5a63;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
 
-text-align:center;
+    .number.change {
+      transform: scale(1.12);
+      opacity: 0.65;
+    }
 
-max-width:800px;
+    .label {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-}
+    .footer {
+      margin-top: 42px;
+      font-size: 1rem;
+      color: #90727a;
+    }
 
-h1{
+    @media (max-width: 820px) {
+      .container {
+        padding: 42px 18px;
+      }
 
-font-family:'Playfair Display', serif;
+      .countdown {
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+        gap: 18px;
+        max-width: 500px;
+      }
+    }
 
-font-size:48px;
+    @media (max-width: 460px) {
+      body {
+        padding: 14px;
+      }
 
-margin-bottom:10px;
+      .container {
+        border-radius: 22px;
+        padding: 34px 14px;
+      }
 
-color:#6b4c55;
+      .subtitle {
+        font-size: 0.86rem;
+        letter-spacing: 0.18em;
+      }
 
-}
+      .date {
+        font-size: 1rem;
+      }
 
-.subtitle{
+      .countdown {
+        gap: 14px;
+      }
 
-font-size:16px;
+      .box {
+        padding: 22px 10px 18px;
+        border-radius: 18px;
+      }
 
-letter-spacing:3px;
-
-text-transform:uppercase;
-
-color:#a98a92;
-
-margin-bottom:30px;
-
-}
-
-.date{
-
-font-style:italic;
-
-margin-bottom:40px;
-
-color:#7a5f66;
-
-}
-
-.countdown{
-
-display:flex;
-
-justify-content:center;
-
-gap:20px;
-
-flex-wrap:wrap;
-
-}
-
-.box{
-
-background:white;
-
-border-radius:15px;
-
-padding:20px;
-
-width:120px;
-
-box-shadow:0 8px 18px rgba(0,0,0,0.08);
-
-}
-
-.number{
-
-font-size:36px;
-
-font-weight:500;
-
-color:#6b4c55;
-
-}
-
-.label{
-
-font-size:12px;
-
-letter-spacing:2px;
-
-text-transform:uppercase;
-
-color:#a98a92;
-
-margin-top:8px;
-
-}
-
-.footer{
-
-margin-top:40px;
-
-color:#7a5f66;
-
-font-size:15px;
-
-}
-
-</style>
+      .label {
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <h1>Lili & Isi</h1>
 
-<div class="container">
+    <div class="subtitle">Visszaszámlálás a nagy napig</div>
 
-<h1>Lili & Isi</h1>
+    <div class="date">2026. április 25. 14:30</div>
 
-<div class="subtitle">
-Visszaszámlálás a nagy napig
-</div>
+    <div class="countdown">
+      <div class="box">
+        <div id="days" class="number">0</div>
+        <div class="label">nap</div>
+      </div>
 
-<div class="date">
-2026. április 25. 14:30
-</div>
+      <div class="box">
+        <div id="hours" class="number">0</div>
+        <div class="label">óra</div>
+      </div>
 
-<div class="countdown">
+      <div class="box">
+        <div id="minutes" class="number">0</div>
+        <div class="label">perc</div>
+      </div>
 
-<div class="box">
-<div id="days" class="number">0</div>
-<div class="label">nap</div>
-</div>
+      <div class="box">
+        <div id="seconds" class="number">0</div>
+        <div class="label">mp</div>
+      </div>
+    </div>
 
-<div class="box">
-<div id="hours" class="number">0</div>
-<div class="label">óra</div>
-</div>
+    <div class="footer">Szeretettel várunk erre a különleges napra</div>
+  </div>
 
-<div class="box">
-<div id="minutes" class="number">0</div>
-<div class="label">perc</div>
-</div>
+  <script>
+    const weddingDate = new Date("2026-04-25T14:30:00+02:00").getTime();
 
-<div class="box">
-<div id="seconds" class="number">0</div>
-<div class="label">mp</div>
-</div>
+    function setValue(id, value) {
+      const el = document.getElementById(id);
+      const currentValue = el.textContent;
 
-</div>
+      if (currentValue !== String(value)) {
+        el.classList.add("change");
 
-<div class="footer">
-Szeretettel várunk erre a különleges napra
-</div>
+        setTimeout(() => {
+          el.textContent = value;
+          el.classList.remove("change");
+        }, 120);
+      }
+    }
 
-</div>
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
 
-<script>
+      if (distance <= 0) {
+        setValue("days", 0);
+        setValue("hours", 0);
+        setValue("minutes", 0);
+        setValue("seconds", 0);
+        return;
+      }
 
-const weddingDate = new Date("2026-04-25T14:30:00+02:00").getTime();
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-function updateCountdown(){
+      setValue("days", days);
+      setValue("hours", hours);
+      setValue("minutes", minutes);
+      setValue("seconds", seconds);
+    }
 
-const now = new Date().getTime();
-
-const distance = weddingDate - now;
-
-if(distance <= 0){
-
-document.getElementById("days").innerHTML=0;
-document.getElementById("hours").innerHTML=0;
-document.getElementById("minutes").innerHTML=0;
-document.getElementById("seconds").innerHTML=0;
-
-return;
-}
-
-const days=Math.floor(distance/(1000*60*60*24));
-
-const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-
-const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-
-const seconds=Math.floor((distance%(1000*60))/1000);
-
-document.getElementById("days").innerHTML=days;
-document.getElementById("hours").innerHTML=hours;
-document.getElementById("minutes").innerHTML=minutes;
-document.getElementById("seconds").innerHTML=seconds;
-
-}
-
-updateCountdown();
-
-setInterval(updateCountdown,1000);
-
-</script>
-
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
